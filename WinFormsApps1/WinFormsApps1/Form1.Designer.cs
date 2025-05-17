@@ -39,6 +39,12 @@
             btnSubmit = new Button();
             radioProducer = new RadioButton();
             linkLabel1 = new LinkLabel();
+            lblInvalidUserName = new Label();
+            lblInvalidEmail = new Label();
+            lblInvalidConfirm = new Label();
+            btnToggle = new Button();
+            lblFillError = new Label();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // lblUserName
@@ -98,6 +104,7 @@
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(266, 31);
             txtPassword.TabIndex = 6;
+            txtPassword.UseSystemPasswordChar = true;
             txtPassword.TextChanged += txtPassword_TextChanged;
             // 
             // txtPassword2
@@ -106,6 +113,7 @@
             txtPassword2.Name = "txtPassword2";
             txtPassword2.Size = new Size(266, 31);
             txtPassword2.TabIndex = 7;
+            txtPassword2.UseSystemPasswordChar = true;
             // 
             // btnSubmit
             // 
@@ -115,6 +123,7 @@
             btnSubmit.TabIndex = 8;
             btnSubmit.Text = "Submit";
             btnSubmit.UseVisualStyleBackColor = true;
+            btnSubmit.Click += btnSubmit_Click;
             // 
             // radioProducer
             // 
@@ -130,18 +139,89 @@
             // linkLabel1
             // 
             linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(55, 416);
+            linkLabel1.Location = new Point(542, 416);
             linkLabel1.Name = "linkLabel1";
             linkLabel1.Size = new Size(213, 25);
             linkLabel1.TabIndex = 10;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Already have an account?";
             // 
+            // lblInvalidUserName
+            // 
+            lblInvalidUserName.AutoSize = true;
+            lblInvalidUserName.ForeColor = Color.Red;
+            lblInvalidUserName.Location = new Point(231, 63);
+            lblInvalidUserName.Name = "lblInvalidUserName";
+            lblInvalidUserName.Size = new Size(153, 25);
+            lblInvalidUserName.TabIndex = 11;
+            lblInvalidUserName.Text = "Invalid User name";
+            lblInvalidUserName.Visible = false;
+            // 
+            // lblInvalidEmail
+            // 
+            lblInvalidEmail.AutoSize = true;
+            lblInvalidEmail.ForeColor = Color.Red;
+            lblInvalidEmail.Location = new Point(231, 137);
+            lblInvalidEmail.Name = "lblInvalidEmail";
+            lblInvalidEmail.Size = new Size(111, 25);
+            lblInvalidEmail.TabIndex = 12;
+            lblInvalidEmail.Text = "Invalid Email";
+            lblInvalidEmail.Visible = false;
+            // 
+            // lblInvalidConfirm
+            // 
+            lblInvalidConfirm.AutoSize = true;
+            lblInvalidConfirm.ForeColor = Color.Red;
+            lblInvalidConfirm.Location = new Point(231, 283);
+            lblInvalidConfirm.Name = "lblInvalidConfirm";
+            lblInvalidConfirm.Size = new Size(403, 25);
+            lblInvalidConfirm.TabIndex = 13;
+            lblInvalidConfirm.Text = "Password Doesn't match your previous password";
+            lblInvalidConfirm.Visible = false;
+            // 
+            // btnToggle
+            // 
+            btnToggle.Location = new Point(522, 215);
+            btnToggle.Name = "btnToggle";
+            btnToggle.Size = new Size(112, 34);
+            btnToggle.TabIndex = 14;
+            btnToggle.Text = "👁";
+            btnToggle.UseVisualStyleBackColor = true;
+            btnToggle.Click += butnToggle_Click;
+            // 
+            // lblFillError
+            // 
+            lblFillError.AutoSize = true;
+            lblFillError.ForeColor = Color.Red;
+            lblFillError.Location = new Point(221, 401);
+            lblFillError.Name = "lblFillError";
+            lblFillError.Size = new Size(183, 25);
+            lblFillError.TabIndex = 15;
+            lblFillError.Text = "Please fill all the fields";
+            lblFillError.Visible = false;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.ControlLight;
+            panel1.BackgroundImage = Properties.Resources.finn;
+            panel1.BackgroundImageLayout = ImageLayout.Stretch;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(800, 450);
+            panel1.TabIndex = 16;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(panel1);
+            Controls.Add(lblFillError);
+            Controls.Add(btnToggle);
+            Controls.Add(lblInvalidConfirm);
+            Controls.Add(lblInvalidEmail);
+            Controls.Add(lblInvalidUserName);
             Controls.Add(linkLabel1);
             Controls.Add(radioProducer);
             Controls.Add(btnSubmit);
@@ -172,5 +252,11 @@
         private Button btnSubmit;
         private RadioButton radioProducer;
         private LinkLabel linkLabel1;
+        private Label lblInvalidUserName;
+        private Label lblInvalidEmail;
+        private Label lblInvalidConfirm;
+        private Button btnToggle;
+        private Label lblFillError;
+        private Panel panel1;
     }
 }
