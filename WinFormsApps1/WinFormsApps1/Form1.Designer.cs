@@ -2,6 +2,7 @@
 {
     partial class EventForm
     {
+        private int usesrId;
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -45,6 +46,7 @@
             btnToggle = new Button();
             lblFillError = new Label();
             panelLogin = new Panel();
+            label2 = new Label();
             lblLoginError = new Label();
             llSignUp = new LinkLabel();
             btnLogin = new Button();
@@ -54,8 +56,10 @@
             pictureBox1 = new PictureBox();
             pbProducerHome = new PictureBox();
             gbProducer = new GroupBox();
-            linkLabel2 = new LinkLabel();
             llLogout = new LinkLabel();
+            linkLabel2 = new LinkLabel();
+            label1 = new Label();
+            lblUserId = new Label();
             panelLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbProducerHome).BeginInit();
@@ -220,6 +224,7 @@
             // 
             panelLogin.Anchor = AnchorStyles.None;
             panelLogin.BackColor = SystemColors.Control;
+            panelLogin.Controls.Add(label2);
             panelLogin.Controls.Add(lblLoginError);
             panelLogin.Controls.Add(llSignUp);
             panelLogin.Controls.Add(btnLogin);
@@ -230,6 +235,15 @@
             panelLogin.Name = "panelLogin";
             panelLogin.Size = new Size(530, 350);
             panelLogin.TabIndex = 17;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(97, 23);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 25);
+            label2.TabIndex = 21;
+            label2.Text = "label2";
             // 
             // lblLoginError
             // 
@@ -324,17 +338,6 @@
             gbProducer.TabStop = false;
             gbProducer.Text = "Dashboard";
             // 
-            // linkLabel2
-            // 
-            linkLabel2.AutoSize = true;
-            linkLabel2.LinkColor = Color.White;
-            linkLabel2.Location = new Point(12, 75);
-            linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(95, 38);
-            linkLabel2.TabIndex = 0;
-            linkLabel2.TabStop = true;
-            linkLabel2.Text = "Home";
-            // 
             // llLogout
             // 
             llLogout.AutoSize = true;
@@ -346,11 +349,43 @@
             llLogout.TabStop = true;
             llLogout.Text = "Log Out";
             // 
+            // linkLabel2
+            // 
+            linkLabel2.AutoSize = true;
+            linkLabel2.LinkColor = Color.White;
+            linkLabel2.Location = new Point(12, 75);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(95, 38);
+            linkLabel2.TabIndex = 0;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "Home";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(231, 21);
+            label1.Name = "label1";
+            label1.Size = new Size(85, 25);
+            label1.TabIndex = 20;
+            label1.Text = "Welcome";
+            // 
+            // lblUserId
+            // 
+            lblUserId.AutoSize = true;
+            lblUserId.Dock = DockStyle.Right;
+            lblUserId.Location = new Point(735, 0);
+            lblUserId.Name = "lblUserId";
+            lblUserId.Size = new Size(65, 25);
+            lblUserId.TabIndex = 21;
+            lblUserId.Text = "UserID";
+            // 
             // EventForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblUserId);
+            Controls.Add(label1);
             Controls.Add(gbProducer);
             Controls.Add(pbProducerHome);
             Controls.Add(panelLogin);
@@ -414,5 +449,8 @@
         private GroupBox gbProducer;
         private LinkLabel llLogout;
         private LinkLabel linkLabel2;
+        private Label label1;
+        private Label label2;
+        private Label lblUserId;
     }
 }
