@@ -1,11 +1,11 @@
 using System.Data.SqlClient;
 using System.Data;
-using EventException; //demo
+using EventException;
 namespace WinFormsApps1
 {
-    public partial class Form1 : Form
+    public partial class EventForm : Form
     {
-        public Form1()
+        public EventForm()
         {
             InitializeComponent();
         }
@@ -40,7 +40,7 @@ namespace WinFormsApps1
             try
             {
                 string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
-                string username, userpassword,useremail, userrole;
+                string username, userpassword, useremail, userrole;
                 if (txtUserName.Text == "" || txtEmail.Text == "" || txtPassword.Text == "" || txtPassword2.Text == "")
                 {
                     throw new EmptyFieldException("Empty FIeld");
@@ -51,7 +51,8 @@ namespace WinFormsApps1
                 }
 
                 else
-                {   if(radioProducer.Checked)
+                {
+                    if (radioProducer.Checked)
                     {
                         userrole = "Producer";
                     }
@@ -84,16 +85,16 @@ namespace WinFormsApps1
                     }
                 }
             }
-            catch(EmptyFieldException ex)
+            catch (EmptyFieldException ex)
             {
                 lblFillError.Visible = true;
             }
-            catch(PasswordMisMatchException ex)
+            catch (PasswordMisMatchException ex)
             {
                 lblInvalidConfirm.Visible = true;
             }
-      
-            catch(SqlException ex)
+
+            catch (SqlException ex)
             {
                 if (ex.Message.Contains("UQ__Users__08638DF87413F620"))
                 {
@@ -108,12 +109,82 @@ namespace WinFormsApps1
                     MessageBox.Show(ex.Message);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
 
-       
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+                if (txtLoginUN.Text == "" || txtLoginPass.Text == "")
+                {
+                    throw new EmptyFieldException("Empty FIeld");
+
+                }
+                else
+                {
+
+                    string username, userpassword;
+                    username = txtLoginUN.Text;
+                    userpassword = txtLoginPass.Text;
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand
+                        {
+                            Connection = conn,
+                            CommandText = "SELECT UserRole FROM Users WHERE UserName=@username AND UserPassword=@userpassword",
+                            CommandType = CommandType.Text
+                        };
+                        cmd.Parameters.AddWithValue("@username", username);
+                        cmd.Parameters.AddWithValue("@userpassword", userpassword);
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            string userrole = reader["UserRole"].ToString();
+                            if (userrole == "Producer")
+                            {
+                                lblLoginError.Visible = false;
+                            }
+                            else
+                            {
+                                lblLoginError.Visible = false;
+                            }
+                        }
+                        else
+                        {
+                            lblLoginError.Text = "Invalid username or password";
+                            lblLoginError.Visible = true;
+                        }
+                    }
+                }
+            }
+            catch (EmptyFieldException ex)
+            {
+                lblLoginError.Text = ex.Message; lblLoginError.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void llSignUp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            pictureBox1.Visible = false;
+            panelLogin.Visible = false;
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+            pictureBox1.Visible = true;
+            panelLogin.Visible = true;
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace WinFormsApps1
 {
-    partial class Form1
+    partial class EventForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -44,7 +44,22 @@
             lblInvalidConfirm = new Label();
             btnToggle = new Button();
             lblFillError = new Label();
-            panel1 = new Panel();
+            panelLogin = new Panel();
+            lblLoginError = new Label();
+            llSignUp = new LinkLabel();
+            btnLogin = new Button();
+            lblLogin = new Label();
+            txtLoginPass = new TextBox();
+            txtLoginUN = new TextBox();
+            pictureBox1 = new PictureBox();
+            pbProducerHome = new PictureBox();
+            gbProducer = new GroupBox();
+            linkLabel2 = new LinkLabel();
+            llLogout = new LinkLabel();
+            panelLogin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbProducerHome).BeginInit();
+            gbProducer.SuspendLayout();
             SuspendLayout();
             // 
             // lblUserName
@@ -145,6 +160,7 @@
             linkLabel1.TabIndex = 10;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Already have an account?";
+            linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
             // lblInvalidUserName
             // 
@@ -200,23 +216,145 @@
             lblFillError.Text = "Please fill all the fields";
             lblFillError.Visible = false;
             // 
-            // panel1
+            // panelLogin
             // 
-            panel1.BackColor = SystemColors.ControlLight;
-            panel1.BackgroundImage = Properties.Resources.finn;
-            panel1.BackgroundImageLayout = ImageLayout.Stretch;
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(800, 450);
-            panel1.TabIndex = 16;
+            panelLogin.Anchor = AnchorStyles.None;
+            panelLogin.BackColor = SystemColors.Control;
+            panelLogin.Controls.Add(lblLoginError);
+            panelLogin.Controls.Add(llSignUp);
+            panelLogin.Controls.Add(btnLogin);
+            panelLogin.Controls.Add(lblLogin);
+            panelLogin.Controls.Add(txtLoginPass);
+            panelLogin.Controls.Add(txtLoginUN);
+            panelLogin.Location = new Point(129, 63);
+            panelLogin.Name = "panelLogin";
+            panelLogin.Size = new Size(530, 350);
+            panelLogin.TabIndex = 17;
             // 
-            // Form1
+            // lblLoginError
+            // 
+            lblLoginError.AutoSize = true;
+            lblLoginError.BackColor = SystemColors.Control;
+            lblLoginError.ForeColor = Color.Red;
+            lblLoginError.Location = new Point(126, 74);
+            lblLoginError.Name = "lblLoginError";
+            lblLoginError.Size = new Size(59, 25);
+            lblLoginError.TabIndex = 5;
+            lblLoginError.Text = "label1";
+            lblLoginError.Visible = false;
+            // 
+            // llSignUp
+            // 
+            llSignUp.AutoSize = true;
+            llSignUp.Location = new Point(162, 293);
+            llSignUp.Name = "llSignUp";
+            llSignUp.Size = new Size(200, 25);
+            llSignUp.TabIndex = 4;
+            llSignUp.TabStop = true;
+            llSignUp.Text = "Don't have an Account?";
+            llSignUp.LinkClicked += llSignUp_LinkClicked;
+            // 
+            // btnLogin
+            // 
+            btnLogin.Location = new Point(117, 241);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(288, 34);
+            btnLogin.TabIndex = 3;
+            btnLogin.Text = "Login";
+            btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += btnLogin_Click;
+            // 
+            // lblLogin
+            // 
+            lblLogin.AutoSize = true;
+            lblLogin.Location = new Point(162, 23);
+            lblLogin.Name = "lblLogin";
+            lblLogin.Size = new Size(188, 25);
+            lblLogin.TabIndex = 2;
+            lblLogin.Text = "Login to Your Account";
+            // 
+            // txtLoginPass
+            // 
+            txtLoginPass.Location = new Point(126, 180);
+            txtLoginPass.Name = "txtLoginPass";
+            txtLoginPass.Size = new Size(279, 31);
+            txtLoginPass.TabIndex = 1;
+            txtLoginPass.Text = "Password";
+            // 
+            // txtLoginUN
+            // 
+            txtLoginUN.Location = new Point(125, 118);
+            txtLoginUN.Name = "txtLoginUN";
+            txtLoginUN.Size = new Size(279, 31);
+            txtLoginUN.TabIndex = 0;
+            txtLoginUN.Text = "User Name";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = SystemColors.AppWorkspace;
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(800, 450);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 16;
+            pictureBox1.TabStop = false;
+            // 
+            // pbProducerHome
+            // 
+            pbProducerHome.Dock = DockStyle.Fill;
+            pbProducerHome.Location = new Point(0, 0);
+            pbProducerHome.Name = "pbProducerHome";
+            pbProducerHome.Size = new Size(800, 450);
+            pbProducerHome.TabIndex = 18;
+            pbProducerHome.TabStop = false;
+            // 
+            // gbProducer
+            // 
+            gbProducer.BackColor = SystemColors.WindowFrame;
+            gbProducer.Controls.Add(llLogout);
+            gbProducer.Controls.Add(linkLabel2);
+            gbProducer.Dock = DockStyle.Left;
+            gbProducer.Font = new Font("Segoe UI", 14F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            gbProducer.ForeColor = SystemColors.ButtonHighlight;
+            gbProducer.Location = new Point(0, 0);
+            gbProducer.Name = "gbProducer";
+            gbProducer.Size = new Size(186, 450);
+            gbProducer.TabIndex = 19;
+            gbProducer.TabStop = false;
+            gbProducer.Text = "Dashboard";
+            // 
+            // linkLabel2
+            // 
+            linkLabel2.AutoSize = true;
+            linkLabel2.LinkColor = Color.White;
+            linkLabel2.Location = new Point(12, 75);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(95, 38);
+            linkLabel2.TabIndex = 0;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "Home";
+            // 
+            // llLogout
+            // 
+            llLogout.AutoSize = true;
+            llLogout.LinkColor = Color.White;
+            llLogout.Location = new Point(12, 165);
+            llLogout.Name = "llLogout";
+            llLogout.Size = new Size(121, 38);
+            llLogout.TabIndex = 1;
+            llLogout.TabStop = true;
+            llLogout.Text = "Log Out";
+            // 
+            // EventForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(panel1);
+            Controls.Add(gbProducer);
+            Controls.Add(pbProducerHome);
+            Controls.Add(panelLogin);
+            Controls.Add(pictureBox1);
             Controls.Add(lblFillError);
             Controls.Add(btnToggle);
             Controls.Add(lblInvalidConfirm);
@@ -233,8 +371,14 @@
             Controls.Add(lblPassword);
             Controls.Add(lblEmail);
             Controls.Add(lblUserName);
-            Name = "Form1";
-            Text = "SignUpForm";
+            Name = "EventForm";
+            Text = "Event";
+            panelLogin.ResumeLayout(false);
+            panelLogin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbProducerHome).EndInit();
+            gbProducer.ResumeLayout(false);
+            gbProducer.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -257,6 +401,18 @@
         private Label lblInvalidConfirm;
         private Button btnToggle;
         private Label lblFillError;
-        private Panel panel1;
+        private Panel panelLogin;
+        private Button btnLogin;
+        private Label lblLogin;
+        private TextBox txtLoginPass;
+        private TextBox txtLoginUN;
+        private LinkLabel llSignUp;
+        private Label lblLoginError;
+        
+        private PictureBox pictureBox1;
+        private PictureBox pbProducerHome;
+        private GroupBox gbProducer;
+        private LinkLabel llLogout;
+        private LinkLabel linkLabel2;
     }
 }
