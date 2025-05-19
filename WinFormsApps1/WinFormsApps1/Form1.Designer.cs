@@ -2,7 +2,7 @@
 {
     partial class EventForm
     {
-        private int usesrId;
+        
         /// <summary>
         ///  Required designer variable.
         /// </summary>
@@ -46,7 +46,6 @@
             btnToggle = new Button();
             lblFillError = new Label();
             panelLogin = new Panel();
-            label2 = new Label();
             lblLoginError = new Label();
             llSignUp = new LinkLabel();
             btnLogin = new Button();
@@ -54,16 +53,29 @@
             txtLoginPass = new TextBox();
             txtLoginUN = new TextBox();
             pictureBox1 = new PictureBox();
-            pbProducerHome = new PictureBox();
-            gbProducer = new GroupBox();
-            llLogout = new LinkLabel();
-            linkLabel2 = new LinkLabel();
+            panelProducer = new Panel();
+            groupBox2 = new GroupBox();
+            btnCreateEvent = new Button();
+            btnDeleteEvent = new Button();
+            txtDeleteEvent = new TextBox();
             label1 = new Label();
-            lblUserId = new Label();
+            txtCreateEventDescription = new TextBox();
+            lblPCreate = new Label();
+            lblPWelcome = new Label();
+            txtCreateEventPrice = new TextBox();
+            txtCreateEventSeat = new TextBox();
+            txtCreateEventVenue = new TextBox();
+            txtCreateEventDate = new TextBox();
+            txtCreateEventName = new TextBox();
+            listBoxProducer = new ListBox();
+            groupBox1 = new GroupBox();
+            llPLogout = new LinkLabel();
+            llPHome = new LinkLabel();
             panelLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pbProducerHome).BeginInit();
-            gbProducer.SuspendLayout();
+            panelProducer.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // lblUserName
@@ -224,26 +236,16 @@
             // 
             panelLogin.Anchor = AnchorStyles.None;
             panelLogin.BackColor = SystemColors.Control;
-            panelLogin.Controls.Add(label2);
             panelLogin.Controls.Add(lblLoginError);
             panelLogin.Controls.Add(llSignUp);
             panelLogin.Controls.Add(btnLogin);
             panelLogin.Controls.Add(lblLogin);
             panelLogin.Controls.Add(txtLoginPass);
             panelLogin.Controls.Add(txtLoginUN);
-            panelLogin.Location = new Point(129, 63);
+            panelLogin.Location = new Point(202, 107);
             panelLogin.Name = "panelLogin";
             panelLogin.Size = new Size(530, 350);
             panelLogin.TabIndex = 17;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(97, 23);
-            label2.Name = "label2";
-            label2.Size = new Size(59, 25);
-            label2.TabIndex = 21;
-            label2.Text = "label2";
             // 
             // lblLoginError
             // 
@@ -309,85 +311,208 @@
             pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(800, 450);
+            pictureBox1.Size = new Size(946, 539);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 16;
             pictureBox1.TabStop = false;
             // 
-            // pbProducerHome
+            // panelProducer
             // 
-            pbProducerHome.Dock = DockStyle.Fill;
-            pbProducerHome.Location = new Point(0, 0);
-            pbProducerHome.Name = "pbProducerHome";
-            pbProducerHome.Size = new Size(800, 450);
-            pbProducerHome.TabIndex = 18;
-            pbProducerHome.TabStop = false;
+            panelProducer.Controls.Add(groupBox2);
+            panelProducer.Controls.Add(listBoxProducer);
+            panelProducer.Controls.Add(groupBox1);
+            panelProducer.Dock = DockStyle.Fill;
+            panelProducer.Location = new Point(0, 0);
+            panelProducer.Name = "panelProducer";
+            panelProducer.Size = new Size(946, 539);
+            panelProducer.TabIndex = 18;
+            panelProducer.Visible = false;
             // 
-            // gbProducer
+            // groupBox2
             // 
-            gbProducer.BackColor = SystemColors.WindowFrame;
-            gbProducer.Controls.Add(llLogout);
-            gbProducer.Controls.Add(linkLabel2);
-            gbProducer.Dock = DockStyle.Left;
-            gbProducer.Font = new Font("Segoe UI", 14F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            gbProducer.ForeColor = SystemColors.ButtonHighlight;
-            gbProducer.Location = new Point(0, 0);
-            gbProducer.Name = "gbProducer";
-            gbProducer.Size = new Size(186, 450);
-            gbProducer.TabIndex = 19;
-            gbProducer.TabStop = false;
-            gbProducer.Text = "Dashboard";
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.BackColor = SystemColors.ScrollBar;
+            groupBox2.Controls.Add(btnCreateEvent);
+            groupBox2.Controls.Add(btnDeleteEvent);
+            groupBox2.Controls.Add(txtDeleteEvent);
+            groupBox2.Controls.Add(label1);
+            groupBox2.Controls.Add(txtCreateEventDescription);
+            groupBox2.Controls.Add(lblPCreate);
+            groupBox2.Controls.Add(lblPWelcome);
+            groupBox2.Controls.Add(txtCreateEventPrice);
+            groupBox2.Controls.Add(txtCreateEventSeat);
+            groupBox2.Controls.Add(txtCreateEventVenue);
+            groupBox2.Controls.Add(txtCreateEventDate);
+            groupBox2.Controls.Add(txtCreateEventName);
+            groupBox2.Location = new Point(117, 0);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(586, 536);
+            groupBox2.TabIndex = 13;
+            groupBox2.TabStop = false;
             // 
-            // llLogout
+            // btnCreateEvent
             // 
-            llLogout.AutoSize = true;
-            llLogout.LinkColor = Color.White;
-            llLogout.Location = new Point(12, 165);
-            llLogout.Name = "llLogout";
-            llLogout.Size = new Size(121, 38);
-            llLogout.TabIndex = 1;
-            llLogout.TabStop = true;
-            llLogout.Text = "Log Out";
+            btnCreateEvent.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnCreateEvent.Location = new Point(433, 304);
+            btnCreateEvent.Name = "btnCreateEvent";
+            btnCreateEvent.Size = new Size(112, 34);
+            btnCreateEvent.TabIndex = 17;
+            btnCreateEvent.Text = "Create";
+            btnCreateEvent.UseVisualStyleBackColor = true;
+            btnCreateEvent.Click += btnCreateEvent_Click;
             // 
-            // linkLabel2
+            // btnDeleteEvent
             // 
-            linkLabel2.AutoSize = true;
-            linkLabel2.LinkColor = Color.White;
-            linkLabel2.Location = new Point(12, 75);
-            linkLabel2.Name = "linkLabel2";
-            linkLabel2.Size = new Size(95, 38);
-            linkLabel2.TabIndex = 0;
-            linkLabel2.TabStop = true;
-            linkLabel2.Text = "Home";
+            btnDeleteEvent.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnDeleteEvent.Location = new Point(328, 498);
+            btnDeleteEvent.Name = "btnDeleteEvent";
+            btnDeleteEvent.Size = new Size(112, 34);
+            btnDeleteEvent.TabIndex = 16;
+            btnDeleteEvent.Text = "Delete";
+            btnDeleteEvent.UseVisualStyleBackColor = true;
+            btnDeleteEvent.Click += btnDeleteEvent_Click;
+            // 
+            // txtDeleteEvent
+            // 
+            txtDeleteEvent.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            txtDeleteEvent.Location = new Point(167, 500);
+            txtDeleteEvent.Name = "txtDeleteEvent";
+            txtDeleteEvent.Size = new Size(150, 31);
+            txtDeleteEvent.TabIndex = 15;
+            txtDeleteEvent.Text = "Event ID";
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label1.AutoSize = true;
-            label1.Location = new Point(231, 21);
+            label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(3, 508);
             label1.Name = "label1";
-            label1.Size = new Size(85, 25);
-            label1.TabIndex = 20;
-            label1.Text = "Welcome";
+            label1.Size = new Size(165, 25);
+            label1.TabIndex = 14;
+            label1.Text = "To delete an Event";
             // 
-            // lblUserId
+            // txtCreateEventDescription
             // 
-            lblUserId.AutoSize = true;
-            lblUserId.Dock = DockStyle.Right;
-            lblUserId.Location = new Point(735, 0);
-            lblUserId.Name = "lblUserId";
-            lblUserId.Size = new Size(65, 25);
-            lblUserId.TabIndex = 21;
-            lblUserId.Text = "UserID";
+            txtCreateEventDescription.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            txtCreateEventDescription.Location = new Point(231, 103);
+            txtCreateEventDescription.Multiline = true;
+            txtCreateEventDescription.Name = "txtCreateEventDescription";
+            txtCreateEventDescription.Size = new Size(314, 178);
+            txtCreateEventDescription.TabIndex = 13;
+            txtCreateEventDescription.Text = "Description...";
+            // 
+            // lblPCreate
+            // 
+            lblPCreate.AutoSize = true;
+            lblPCreate.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPCreate.Location = new Point(6, 63);
+            lblPCreate.Name = "lblPCreate";
+            lblPCreate.Size = new Size(169, 30);
+            lblPCreate.TabIndex = 6;
+            lblPCreate.Text = "Create an Event";
+            // 
+            // lblPWelcome
+            // 
+            lblPWelcome.AutoSize = true;
+            lblPWelcome.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPWelcome.Location = new Point(0, 1);
+            lblPWelcome.Name = "lblPWelcome";
+            lblPWelcome.Size = new Size(197, 54);
+            lblPWelcome.TabIndex = 1;
+            lblPWelcome.Text = "Welcome";
+            // 
+            // txtCreateEventPrice
+            // 
+            txtCreateEventPrice.Location = new Point(6, 394);
+            txtCreateEventPrice.Name = "txtCreateEventPrice";
+            txtCreateEventPrice.Size = new Size(213, 31);
+            txtCreateEventPrice.TabIndex = 8;
+            txtCreateEventPrice.Text = "Price per seat";
+            // 
+            // txtCreateEventSeat
+            // 
+            txtCreateEventSeat.Location = new Point(7, 319);
+            txtCreateEventSeat.Name = "txtCreateEventSeat";
+            txtCreateEventSeat.Size = new Size(213, 31);
+            txtCreateEventSeat.TabIndex = 9;
+            txtCreateEventSeat.Text = "Total Seats";
+            // 
+            // txtCreateEventVenue
+            // 
+            txtCreateEventVenue.Location = new Point(7, 246);
+            txtCreateEventVenue.Name = "txtCreateEventVenue";
+            txtCreateEventVenue.Size = new Size(213, 31);
+            txtCreateEventVenue.TabIndex = 10;
+            txtCreateEventVenue.Text = "Venue";
+            // 
+            // txtCreateEventDate
+            // 
+            txtCreateEventDate.Location = new Point(7, 172);
+            txtCreateEventDate.Name = "txtCreateEventDate";
+            txtCreateEventDate.Size = new Size(213, 31);
+            txtCreateEventDate.TabIndex = 11;
+            txtCreateEventDate.Text = "Date, eg: 00:00:00";
+            // 
+            // txtCreateEventName
+            // 
+            txtCreateEventName.Location = new Point(6, 110);
+            txtCreateEventName.Name = "txtCreateEventName";
+            txtCreateEventName.Size = new Size(213, 31);
+            txtCreateEventName.TabIndex = 12;
+            txtCreateEventName.Text = "Event name";
+            // 
+            // listBoxProducer
+            // 
+            listBoxProducer.Dock = DockStyle.Right;
+            listBoxProducer.FormattingEnabled = true;
+            listBoxProducer.ItemHeight = 25;
+            listBoxProducer.Location = new Point(701, 0);
+            listBoxProducer.Name = "listBoxProducer";
+            listBoxProducer.Size = new Size(245, 539);
+            listBoxProducer.TabIndex = 5;
+            // 
+            // groupBox1
+            // 
+            groupBox1.BackColor = SystemColors.AppWorkspace;
+            groupBox1.Controls.Add(llPLogout);
+            groupBox1.Controls.Add(llPHome);
+            groupBox1.Dock = DockStyle.Left;
+            groupBox1.Font = new Font("Segoe UI", 14F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            groupBox1.Location = new Point(0, 0);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(123, 539);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            // 
+            // llPLogout
+            // 
+            llPLogout.AutoSize = true;
+            llPLogout.LinkColor = Color.Black;
+            llPLogout.Location = new Point(0, 73);
+            llPLogout.Name = "llPLogout";
+            llPLogout.Size = new Size(108, 38);
+            llPLogout.TabIndex = 1;
+            llPLogout.TabStop = true;
+            llPLogout.Text = "Logout";
+            // 
+            // llPHome
+            // 
+            llPHome.AutoSize = true;
+            llPHome.LinkColor = Color.Black;
+            llPHome.Location = new Point(6, 10);
+            llPHome.Name = "llPHome";
+            llPHome.Size = new Size(95, 38);
+            llPHome.TabIndex = 0;
+            llPHome.TabStop = true;
+            llPHome.Text = "Home";
             // 
             // EventForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(lblUserId);
-            Controls.Add(label1);
-            Controls.Add(gbProducer);
-            Controls.Add(pbProducerHome);
+            ClientSize = new Size(946, 539);
+            Controls.Add(panelProducer);
             Controls.Add(panelLogin);
             Controls.Add(pictureBox1);
             Controls.Add(lblFillError);
@@ -411,9 +536,11 @@
             panelLogin.ResumeLayout(false);
             panelLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pbProducerHome).EndInit();
-            gbProducer.ResumeLayout(false);
-            gbProducer.PerformLayout();
+            panelProducer.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -445,12 +572,23 @@
         private Label lblLoginError;
         
         private PictureBox pictureBox1;
-        private PictureBox pbProducerHome;
-        private GroupBox gbProducer;
-        private LinkLabel llLogout;
-        private LinkLabel linkLabel2;
+        private Panel panelProducer;
+        private GroupBox groupBox1;
+        private LinkLabel llPLogout;
+        private LinkLabel llPHome;
+        private Label lblPWelcome;
+        private ListBox listBoxProducer;
+        private Label lblPCreate;
+        private TextBox txtCreateEventName;
+        private TextBox txtCreateEventDate;
+        private TextBox txtCreateEventVenue;
+        private TextBox txtCreateEventSeat;
+        private TextBox txtCreateEventPrice;
+        private GroupBox groupBox2;
+        private TextBox txtCreateEventDescription;
         private Label label1;
-        private Label label2;
-        private Label lblUserId;
+        private Button btnDeleteEvent;
+        private TextBox txtDeleteEvent;
+        private Button btnCreateEvent;
     }
 }
