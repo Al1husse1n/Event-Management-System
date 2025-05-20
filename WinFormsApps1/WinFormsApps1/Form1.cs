@@ -1,6 +1,7 @@
 using System.Data.SqlClient;
 using System.Data;
 using EventException;
+using System.Windows.Forms;
 namespace WinFormsApps1
 {
     public partial class EventForm : Form
@@ -162,7 +163,7 @@ namespace WinFormsApps1
                                         SqlCommand cmd1 = new SqlCommand
                                         {
                                             Connection = conn1,
-                                            CommandText = $"SELECT EventName From Events WHERE ProducerId = @producerId",
+                                            CommandText = "SELECT EventName From Events WHERE ProducerId = @producerId",
                                             CommandType = CommandType.Text
                                         };
                                         cmd1.Parameters.AddWithValue("@producerId", reader["UserId"]);
@@ -328,12 +329,75 @@ namespace WinFormsApps1
 
         private void listBoxProducer_DoubleClick(object sender, EventArgs e)
         {
-
+            string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+            try
+            {
+                using (SqlConnection conn1 = new SqlConnection(connectionString))
+                {
+                    conn1.Open();
+                    SqlCommand cmd = new SqlCommand
+                    {
+                        Connection = conn1,
+                        CommandText = "Select EventId from Events Where EventName = @eventname",
+                        CommandType = CommandType.Text
+                    };
+                    cmd.Parameters.AddWithValue("@eventname", listBoxProducer.SelectedItem.ToString());
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        int eventid = Convert.ToInt32(reader["EventId"]);
+                        EventDetail(eventid);
+                        panelEventDetail.Visible = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Events detail not found");
+                    }
+                }
+            }
+            catch(SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
-        private void EventDetail(string eventname)
+        private void EventDetail(int eventid)
         {
-            
+            string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand
+                {
+                    Connection = conn,
+                    CommandText = "Select EventName, EventId, EventDateTime, EventVenue, TotalSeats, EventPrice from Events Where EventId = @eventid",
+                    CommandType = CommandType.Text
+                };
+                cmd.Parameters.AddWithValue("@eventid", eventid);
+                SqlDataReader reader = cmd.ExecuteReader();
+                using (reader)
+                {
+                    if (reader.Read())
+                    {
+                        lblEventNameDetail.Text = "Name: " + reader["EventName"].ToString();
+                        lblEventDateDetail.Text = "Date: " + reader["EventDateTime"].ToString();
+                        lblEventIdDetail.Text = "Event ID: " + reader["EventId"].ToString();
+                        lblEventPriceDetail.Text = "Price: " + reader["EventPrice"].ToString();
+                        lblEventSeatsDetail.Text = "Total Seats: " + reader["TotalSeats"].ToString();
+                        lblEventVenueDetail.Text = "Venue: " + reader["EventVenue"].ToString();
+                    }
+                }
+            }
+        }
+
+        private void btnPBack_Click(object sender, EventArgs e)
+        {
+            panelEventDetail.Visible = false;
         }
     }
 }

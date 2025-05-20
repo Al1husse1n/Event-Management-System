@@ -54,7 +54,8 @@
             txtLoginUN = new TextBox();
             pictureBox1 = new PictureBox();
             panelProducer = new Panel();
-            panel1 = new Panel();
+            panelEventDetail = new Panel();
+            btnPBack = new Button();
             lblEventPriceDetail = new Label();
             lblEventSeatsDetail = new Label();
             lblEventVenueDetail = new Label();
@@ -81,7 +82,7 @@
             panelLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelProducer.SuspendLayout();
-            panel1.SuspendLayout();
+            panelEventDetail.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -326,7 +327,7 @@
             // 
             // panelProducer
             // 
-            panelProducer.Controls.Add(panel1);
+            panelProducer.Controls.Add(panelEventDetail);
             panelProducer.Controls.Add(groupBox2);
             panelProducer.Controls.Add(listBoxProducer);
             panelProducer.Controls.Add(groupBox1);
@@ -337,19 +338,31 @@
             panelProducer.TabIndex = 18;
             panelProducer.Visible = false;
             // 
-            // panel1
+            // panelEventDetail
             // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            panel1.Controls.Add(lblEventPriceDetail);
-            panel1.Controls.Add(lblEventSeatsDetail);
-            panel1.Controls.Add(lblEventVenueDetail);
-            panel1.Controls.Add(lblEventDateDetail);
-            panel1.Controls.Add(lblEventIdDetail);
-            panel1.Controls.Add(lblEventNameDetail);
-            panel1.Location = new Point(666, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(280, 539);
-            panel1.TabIndex = 14;
+            panelEventDetail.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            panelEventDetail.Controls.Add(btnPBack);
+            panelEventDetail.Controls.Add(lblEventPriceDetail);
+            panelEventDetail.Controls.Add(lblEventSeatsDetail);
+            panelEventDetail.Controls.Add(lblEventVenueDetail);
+            panelEventDetail.Controls.Add(lblEventDateDetail);
+            panelEventDetail.Controls.Add(lblEventIdDetail);
+            panelEventDetail.Controls.Add(lblEventNameDetail);
+            panelEventDetail.Location = new Point(666, 0);
+            panelEventDetail.Name = "panelEventDetail";
+            panelEventDetail.Size = new Size(280, 539);
+            panelEventDetail.TabIndex = 14;
+            panelEventDetail.Visible = false;
+            // 
+            // btnPBack
+            // 
+            btnPBack.Location = new Point(165, 435);
+            btnPBack.Name = "btnPBack";
+            btnPBack.Size = new Size(112, 34);
+            btnPBack.TabIndex = 6;
+            btnPBack.Text = "Back";
+            btnPBack.UseVisualStyleBackColor = true;
+            btnPBack.Click += btnPBack_Click;
             // 
             // lblEventPriceDetail
             // 
@@ -615,8 +628,8 @@
             panelLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panelProducer.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            panelEventDetail.ResumeLayout(false);
+            panelEventDetail.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -670,12 +683,13 @@
         private Button btnDeleteEvent;
         private TextBox txtDeleteEvent;
         private Button btnCreateEvent;
-        private Panel panel1;
+        private Panel panelEventDetail;
         private Label lblEventIdDetail;
         private Label lblEventNameDetail;
         private Label lblEventPriceDetail;
         private Label lblEventSeatsDetail;
         private Label lblEventVenueDetail;
         private Label lblEventDateDetail;
+        private Button btnPBack;
     }
 }
