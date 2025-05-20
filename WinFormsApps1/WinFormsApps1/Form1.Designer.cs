@@ -54,6 +54,13 @@
             txtLoginUN = new TextBox();
             pictureBox1 = new PictureBox();
             panelProducer = new Panel();
+            panel1 = new Panel();
+            lblEventPriceDetail = new Label();
+            lblEventSeatsDetail = new Label();
+            lblEventVenueDetail = new Label();
+            lblEventDateDetail = new Label();
+            lblEventIdDetail = new Label();
+            lblEventNameDetail = new Label();
             groupBox2 = new GroupBox();
             btnCreateEvent = new Button();
             btnDeleteEvent = new Button();
@@ -74,6 +81,7 @@
             panelLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelProducer.SuspendLayout();
+            panel1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -318,6 +326,7 @@
             // 
             // panelProducer
             // 
+            panelProducer.Controls.Add(panel1);
             panelProducer.Controls.Add(groupBox2);
             panelProducer.Controls.Add(listBoxProducer);
             panelProducer.Controls.Add(groupBox1);
@@ -327,6 +336,74 @@
             panelProducer.Size = new Size(946, 539);
             panelProducer.TabIndex = 18;
             panelProducer.Visible = false;
+            // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            panel1.Controls.Add(lblEventPriceDetail);
+            panel1.Controls.Add(lblEventSeatsDetail);
+            panel1.Controls.Add(lblEventVenueDetail);
+            panel1.Controls.Add(lblEventDateDetail);
+            panel1.Controls.Add(lblEventIdDetail);
+            panel1.Controls.Add(lblEventNameDetail);
+            panel1.Location = new Point(666, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(280, 539);
+            panel1.TabIndex = 14;
+            // 
+            // lblEventPriceDetail
+            // 
+            lblEventPriceDetail.AutoSize = true;
+            lblEventPriceDetail.Location = new Point(15, 325);
+            lblEventPriceDetail.Name = "lblEventPriceDetail";
+            lblEventPriceDetail.Size = new Size(49, 25);
+            lblEventPriceDetail.TabIndex = 5;
+            lblEventPriceDetail.Text = "Price";
+            // 
+            // lblEventSeatsDetail
+            // 
+            lblEventSeatsDetail.AutoSize = true;
+            lblEventSeatsDetail.Location = new Point(15, 255);
+            lblEventSeatsDetail.Name = "lblEventSeatsDetail";
+            lblEventSeatsDetail.Size = new Size(96, 25);
+            lblEventSeatsDetail.TabIndex = 4;
+            lblEventSeatsDetail.Text = "Total Seats";
+            // 
+            // lblEventVenueDetail
+            // 
+            lblEventVenueDetail.AutoSize = true;
+            lblEventVenueDetail.Location = new Point(15, 200);
+            lblEventVenueDetail.Name = "lblEventVenueDetail";
+            lblEventVenueDetail.Size = new Size(60, 25);
+            lblEventVenueDetail.TabIndex = 3;
+            lblEventVenueDetail.Text = "Venue";
+            // 
+            // lblEventDateDetail
+            // 
+            lblEventDateDetail.AutoSize = true;
+            lblEventDateDetail.Location = new Point(15, 137);
+            lblEventDateDetail.Name = "lblEventDateDetail";
+            lblEventDateDetail.Size = new Size(49, 25);
+            lblEventDateDetail.TabIndex = 2;
+            lblEventDateDetail.Text = "Date";
+            // 
+            // lblEventIdDetail
+            // 
+            lblEventIdDetail.AutoSize = true;
+            lblEventIdDetail.Location = new Point(15, 79);
+            lblEventIdDetail.Name = "lblEventIdDetail";
+            lblEventIdDetail.Size = new Size(78, 25);
+            lblEventIdDetail.TabIndex = 1;
+            lblEventIdDetail.Text = "Event ID";
+            // 
+            // lblEventNameDetail
+            // 
+            lblEventNameDetail.AutoSize = true;
+            lblEventNameDetail.Location = new Point(15, 19);
+            lblEventNameDetail.Name = "lblEventNameDetail";
+            lblEventNameDetail.Size = new Size(59, 25);
+            lblEventNameDetail.TabIndex = 0;
+            lblEventNameDetail.Text = "Name";
             // 
             // groupBox2
             // 
@@ -353,7 +430,7 @@
             // btnCreateEvent
             // 
             btnCreateEvent.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnCreateEvent.Location = new Point(433, 304);
+            btnCreateEvent.Location = new Point(391, 304);
             btnCreateEvent.Name = "btnCreateEvent";
             btnCreateEvent.Size = new Size(112, 34);
             btnCreateEvent.TabIndex = 17;
@@ -398,7 +475,7 @@
             txtCreateEventDescription.Location = new Point(231, 103);
             txtCreateEventDescription.Multiline = true;
             txtCreateEventDescription.Name = "txtCreateEventDescription";
-            txtCreateEventDescription.Size = new Size(314, 178);
+            txtCreateEventDescription.Size = new Size(272, 178);
             txtCreateEventDescription.TabIndex = 13;
             txtCreateEventDescription.Text = "Description...";
             // 
@@ -415,10 +492,10 @@
             // lblPWelcome
             // 
             lblPWelcome.AutoSize = true;
-            lblPWelcome.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPWelcome.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPWelcome.Location = new Point(0, 1);
             lblPWelcome.Name = "lblPWelcome";
-            lblPWelcome.Size = new Size(197, 54);
+            lblPWelcome.Size = new Size(175, 48);
             lblPWelcome.TabIndex = 1;
             lblPWelcome.Text = "Welcome";
             // 
@@ -471,6 +548,7 @@
             listBoxProducer.Name = "listBoxProducer";
             listBoxProducer.Size = new Size(245, 539);
             listBoxProducer.TabIndex = 5;
+            listBoxProducer.DoubleClick += listBoxProducer_DoubleClick;
             // 
             // groupBox1
             // 
@@ -537,6 +615,8 @@
             panelLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panelProducer.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -590,5 +670,12 @@
         private Button btnDeleteEvent;
         private TextBox txtDeleteEvent;
         private Button btnCreateEvent;
+        private Panel panel1;
+        private Label lblEventIdDetail;
+        private Label lblEventNameDetail;
+        private Label lblEventPriceDetail;
+        private Label lblEventSeatsDetail;
+        private Label lblEventVenueDetail;
+        private Label lblEventDateDetail;
     }
 }

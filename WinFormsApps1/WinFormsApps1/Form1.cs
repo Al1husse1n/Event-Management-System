@@ -287,11 +287,13 @@ namespace WinFormsApps1
         private void btnDeleteEvent_Click(object sender, EventArgs e)
         {
             try
-            {   if(txtDeleteEvent.Text == "" || txtDeleteEvent.Text == "Event ID")
+            {
+                if (txtDeleteEvent.Text == "" || txtDeleteEvent.Text == "Event ID")
                 {
                     throw new EmptyFieldException("Enter the Event ID to delete the Event");
                 }
-                else { 
+                else
+                {
                     int deleteUserId = int.Parse(txtDeleteEvent.Text);
                     string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
                     using (SqlConnection conn = new SqlConnection(connectionString))
@@ -307,10 +309,10 @@ namespace WinFormsApps1
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("You deleted an Event");
 
-                    }    
+                    }
                 }
             }
-            catch(EmptyFieldException ex)
+            catch (EmptyFieldException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -322,6 +324,16 @@ namespace WinFormsApps1
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void listBoxProducer_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EventDetail(string eventname)
+        {
+            
         }
     }
 }
