@@ -11,16 +11,7 @@ namespace WinFormsApps1
             InitializeComponent();
         }
 
-        private void txtEmail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void butnToggle_Click(object sender, EventArgs e)
         {
             if (txtPassword.UseSystemPasswordChar == true)

@@ -136,7 +136,7 @@
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(266, 31);
             txtEmail.TabIndex = 5;
-            txtEmail.TextChanged += txtEmail_TextChanged;
+           
             // 
             // txtPassword
             // 
@@ -145,7 +145,7 @@
             txtPassword.Size = new Size(266, 31);
             txtPassword.TabIndex = 6;
             txtPassword.UseSystemPasswordChar = true;
-            txtPassword.TextChanged += txtPassword_TextChanged;
+           
             // 
             // txtPassword2
             // 
