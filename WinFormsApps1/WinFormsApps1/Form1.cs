@@ -394,7 +394,7 @@ namespace WinFormsApps1
 
         private void llPLogout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            panelProducer.Visible = false;
+            panelProducer.Visible = false; //add
             listBoxProducer.Items.Clear();
         }
     }
