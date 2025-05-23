@@ -11,7 +11,7 @@ namespace WinFormsApps1
             InitializeComponent();
         }
 
-       
+
         private void butnToggle_Click(object sender, EventArgs e)
         {
             if (txtPassword.UseSystemPasswordChar == true)
@@ -140,6 +140,7 @@ namespace WinFormsApps1
 
                             if (reader.Read())
                             {
+                                txtLoginUN.Text = "User Name"; txtLoginPass.Text = "Password";
                                 string userrole = reader["UserRole"].ToString();
                                 if (userrole == "Producer")
                                 {
@@ -346,11 +347,11 @@ namespace WinFormsApps1
                     }
                 }
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -389,6 +390,12 @@ namespace WinFormsApps1
         private void btnPBack_Click(object sender, EventArgs e)
         {
             panelEventDetail.Visible = false;
+        }
+
+        private void llPLogout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            panelProducer.Visible = false;
+            listBoxProducer.Items.Clear();
         }
     }
 }

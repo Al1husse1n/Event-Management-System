@@ -78,7 +78,6 @@
             listBoxProducer = new ListBox();
             groupBox1 = new GroupBox();
             llPLogout = new LinkLabel();
-            llPHome = new LinkLabel();
             panelLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelProducer.SuspendLayout();
@@ -136,7 +135,6 @@
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(266, 31);
             txtEmail.TabIndex = 5;
-           
             // 
             // txtPassword
             // 
@@ -145,7 +143,6 @@
             txtPassword.Size = new Size(266, 31);
             txtPassword.TabIndex = 6;
             txtPassword.UseSystemPasswordChar = true;
-           
             // 
             // txtPassword2
             // 
@@ -567,7 +564,6 @@
             // 
             groupBox1.BackColor = SystemColors.AppWorkspace;
             groupBox1.Controls.Add(llPLogout);
-            groupBox1.Controls.Add(llPHome);
             groupBox1.Dock = DockStyle.Left;
             groupBox1.Font = new Font("Segoe UI", 14F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             groupBox1.Location = new Point(0, 0);
@@ -586,17 +582,7 @@
             llPLogout.TabIndex = 1;
             llPLogout.TabStop = true;
             llPLogout.Text = "Logout";
-            // 
-            // llPHome
-            // 
-            llPHome.AutoSize = true;
-            llPHome.LinkColor = Color.Black;
-            llPHome.Location = new Point(6, 10);
-            llPHome.Name = "llPHome";
-            llPHome.Size = new Size(95, 38);
-            llPHome.TabIndex = 0;
-            llPHome.TabStop = true;
-            llPHome.Text = "Home";
+            llPLogout.LinkClicked += llPLogout_LinkClicked;
             // 
             // EventForm
             // 
@@ -668,7 +654,6 @@
         private Panel panelProducer;
         private GroupBox groupBox1;
         private LinkLabel llPLogout;
-        private LinkLabel llPHome;
         private Label lblPWelcome;
         private ListBox listBoxProducer;
         private Label lblPCreate;
