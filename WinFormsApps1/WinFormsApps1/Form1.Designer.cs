@@ -610,6 +610,7 @@
             Controls.Add(lblUserName);
             Name = "EventForm";
             Text = "Event";
+            Load += EventForm_Load;
             panelLogin.ResumeLayout(false);
             panelLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

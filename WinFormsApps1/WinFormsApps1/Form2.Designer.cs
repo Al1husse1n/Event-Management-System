@@ -33,9 +33,11 @@
             llHome = new LinkLabel();
             llCLogout = new LinkLabel();
             panelWelcomeCustomer = new Panel();
+            lblUpcoming = new Label();
             button1 = new Button();
             txtCSearchEvent = new TextBox();
             lblCWelcome = new Label();
+            flowLayoutPanel1 = new FlowLayoutPanel();
             groupBox1.SuspendLayout();
             panelWelcomeCustomer.SuspendLayout();
             SuspendLayout();
@@ -91,6 +93,7 @@
             // 
             panelWelcomeCustomer.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panelWelcomeCustomer.BackColor = SystemColors.ScrollBar;
+            panelWelcomeCustomer.Controls.Add(lblUpcoming);
             panelWelcomeCustomer.Controls.Add(button1);
             panelWelcomeCustomer.Controls.Add(txtCSearchEvent);
             panelWelcomeCustomer.Controls.Add(lblCWelcome);
@@ -98,6 +101,16 @@
             panelWelcomeCustomer.Name = "panelWelcomeCustomer";
             panelWelcomeCustomer.Size = new Size(758, 172);
             panelWelcomeCustomer.TabIndex = 2;
+            // 
+            // lblUpcoming
+            // 
+            lblUpcoming.AutoSize = true;
+            lblUpcoming.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblUpcoming.Location = new Point(-5, 104);
+            lblUpcoming.Name = "lblUpcoming";
+            lblUpcoming.Size = new Size(239, 38);
+            lblUpcoming.TabIndex = 3;
+            lblUpcoming.Text = "Upcoming Events";
             // 
             // button1
             // 
@@ -108,14 +121,17 @@
             button1.TabIndex = 2;
             button1.Text = "🔍";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // txtCSearchEvent
             // 
             txtCSearchEvent.Anchor = AnchorStyles.Right;
+            txtCSearchEvent.BackColor = SystemColors.Window;
             txtCSearchEvent.Location = new Point(453, 48);
             txtCSearchEvent.Name = "txtCSearchEvent";
             txtCSearchEvent.Size = new Size(206, 31);
             txtCSearchEvent.TabIndex = 1;
+            txtCSearchEvent.TextChanged += txtCSearchEvent_TextChanged;
             // 
             // lblCWelcome
             // 
@@ -127,15 +143,28 @@
             lblCWelcome.TabIndex = 0;
             lblCWelcome.Text = "Welcome";
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.BackColor = SystemColors.ScrollBar;
+            flowLayoutPanel1.CausesValidation = false;
+            flowLayoutPanel1.Location = new Point(119, 171);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(763, 301);
+            flowLayoutPanel1.TabIndex = 3;
+            // 
             // CustomerForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(883, 450);
+            Controls.Add(flowLayoutPanel1);
             Controls.Add(panelWelcomeCustomer);
             Controls.Add(groupBox1);
             Name = "CustomerForm";
             Text = "Customer";
+            Load += CustomerForm_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             panelWelcomeCustomer.ResumeLayout(false);
@@ -153,5 +182,7 @@
         private Label lblCWelcome;
         private Button button1;
         private TextBox txtCSearchEvent;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Label lblUpcoming;
     }
 }

@@ -406,5 +406,10 @@ namespace WinFormsApps1
             panelProducer.Visible = false; //add
             listBoxProducer.Items.Clear();
         }
+
+        private void EventForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
