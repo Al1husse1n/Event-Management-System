@@ -287,21 +287,30 @@ namespace WinFormsApps1
                 }
                 else
                 {
-                    int deleteUserId = int.Parse(txtDeleteEvent.Text);
-                    string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
-                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    var result = MessageBox.Show("Are you sure you want to delete this event?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (result == DialogResult.Yes)
                     {
-                        conn.Open();
-                        SqlCommand cmd = new SqlCommand
-                        {
-                            Connection = conn,
-                            CommandText = "DeleteEvent",
-                            CommandType = CommandType.StoredProcedure
-                        };
-                        cmd.Parameters.AddWithValue("@eventid", deleteUserId);
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("You deleted an Event");
 
+                        int deleteUserId = int.Parse(txtDeleteEvent.Text);
+                        string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+                        using (SqlConnection conn = new SqlConnection(connectionString))
+                        {
+                            conn.Open();
+                            SqlCommand cmd = new SqlCommand
+                            {
+                                Connection = conn,
+                                CommandText = "DeleteEvent",
+                                CommandType = CommandType.StoredProcedure
+                            };
+                            cmd.Parameters.AddWithValue("@eventid", deleteUserId);
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("You deleted an Event");
+
+                        }
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        txtDeleteEvent.Text = "";
                     }
                 }
             }

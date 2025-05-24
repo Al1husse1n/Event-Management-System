@@ -568,7 +568,7 @@
             groupBox1.Font = new Font("Segoe UI", 14F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(123, 539);
+            groupBox1.Size = new Size(118, 539);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             // 
