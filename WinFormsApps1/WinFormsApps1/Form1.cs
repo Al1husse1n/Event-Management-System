@@ -129,7 +129,7 @@ namespace WinFormsApps1
                         SqlCommand cmd = new SqlCommand
                         {
                             Connection = conn,
-                            CommandText = "SELECT UserRole,UserId From Users WHERE UserName=@username AND UserPassword=@userpassword",
+                            CommandText = "SELECT * From Users WHERE UserName=@username AND UserPassword=@userpassword",
                             CommandType = CommandType.Text
                         };
                         cmd.Parameters.AddWithValue("@username", username);
@@ -142,6 +142,9 @@ namespace WinFormsApps1
                             {
                                 txtLoginUN.Text = "User Name"; txtLoginPass.Text = "Password";
                                 string userrole = reader["UserRole"].ToString();
+                                string useremail = reader["UserEmail"].ToString();
+                                int userid = reader.GetInt32(reader.GetOrdinal("UserId"));
+                                string userName = reader["UserName"].ToString();
                                 if (userrole == "Producer")
                                 {
                                     lblLoginError.Visible = false;
@@ -179,7 +182,10 @@ namespace WinFormsApps1
                                 }
                                 else
                                 {
+                                    this.Close();
+                                    Application.Run(new CustomerForm(userid, userName, useremail));
                                     lblLoginError.Visible = false;
+
                                 }
                             }
                             else
@@ -398,7 +404,14 @@ namespace WinFormsApps1
 
         private void btnPBack_Click(object sender, EventArgs e)
         {
-            panelEventDetail.Visible = false;
+            if (panelAttendees.Visible == true)
+            {
+                panelAttendees.Visible = false;
+            }
+            else
+            {
+                panelEventDetail.Visible = false;
+            }
         }
 
         private void llPLogout_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -407,9 +420,36 @@ namespace WinFormsApps1
             listBoxProducer.Items.Clear();
         }
 
-        private void EventForm_Load(object sender, EventArgs e)
-        {
 
+        private void btnAttendees_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                panelAttendees.Visible = true;
+                string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    SqlCommand cmd = new SqlCommand
+                    {
+                        Connection = conn,
+                        CommandText = "Attendee",
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    cmd.Parameters.AddWithValue("@eventid", int.Parse(lblEventIdDetail.Text.Split(':')[1].Trim()));
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+                    dataGridView1.DataSource = table;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
         }
+
+      
     }
 }

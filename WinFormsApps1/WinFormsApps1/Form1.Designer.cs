@@ -55,6 +55,7 @@
             pictureBox1 = new PictureBox();
             panelProducer = new Panel();
             panelEventDetail = new Panel();
+            btnAttendees = new Button();
             btnPBack = new Button();
             lblEventPriceDetail = new Label();
             lblEventSeatsDetail = new Label();
@@ -63,6 +64,10 @@
             lblEventIdDetail = new Label();
             lblEventNameDetail = new Label();
             groupBox2 = new GroupBox();
+            panelAttendees = new Panel();
+            dataGridView1 = new DataGridView();
+            btnSearchAttendees = new Button();
+            textBox1 = new TextBox();
             btnCreateEvent = new Button();
             btnDeleteEvent = new Button();
             txtDeleteEvent = new TextBox();
@@ -83,6 +88,8 @@
             panelProducer.SuspendLayout();
             panelEventDetail.SuspendLayout();
             groupBox2.SuspendLayout();
+            panelAttendees.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -338,6 +345,7 @@
             // panelEventDetail
             // 
             panelEventDetail.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            panelEventDetail.Controls.Add(btnAttendees);
             panelEventDetail.Controls.Add(btnPBack);
             panelEventDetail.Controls.Add(lblEventPriceDetail);
             panelEventDetail.Controls.Add(lblEventSeatsDetail);
@@ -350,6 +358,16 @@
             panelEventDetail.Size = new Size(280, 539);
             panelEventDetail.TabIndex = 14;
             panelEventDetail.Visible = false;
+            // 
+            // btnAttendees
+            // 
+            btnAttendees.Location = new Point(15, 435);
+            btnAttendees.Name = "btnAttendees";
+            btnAttendees.Size = new Size(112, 34);
+            btnAttendees.TabIndex = 7;
+            btnAttendees.Text = "Attendees";
+            btnAttendees.UseVisualStyleBackColor = true;
+            btnAttendees.Click += btnAttendees_Click;
             // 
             // btnPBack
             // 
@@ -419,6 +437,7 @@
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.BackColor = SystemColors.ScrollBar;
+            groupBox2.Controls.Add(panelAttendees);
             groupBox2.Controls.Add(btnCreateEvent);
             groupBox2.Controls.Add(btnDeleteEvent);
             groupBox2.Controls.Add(txtDeleteEvent);
@@ -436,6 +455,47 @@
             groupBox2.Size = new Size(586, 536);
             groupBox2.TabIndex = 13;
             groupBox2.TabStop = false;
+            // 
+            // panelAttendees
+            // 
+            panelAttendees.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panelAttendees.BackColor = SystemColors.Control;
+            panelAttendees.Controls.Add(dataGridView1);
+            panelAttendees.Controls.Add(btnSearchAttendees);
+            panelAttendees.Controls.Add(textBox1);
+            panelAttendees.Location = new Point(0, 3);
+            panelAttendees.Name = "panelAttendees";
+            panelAttendees.Size = new Size(558, 527);
+            panelAttendees.TabIndex = 18;
+            panelAttendees.Visible = false;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(22, 70);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 62;
+            dataGridView1.Size = new Size(511, 454);
+            dataGridView1.TabIndex = 2;
+            // 
+            // btnSearchAttendees
+            // 
+            btnSearchAttendees.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSearchAttendees.Location = new Point(431, 7);
+            btnSearchAttendees.Name = "btnSearchAttendees";
+            btnSearchAttendees.Size = new Size(112, 34);
+            btnSearchAttendees.TabIndex = 1;
+            btnSearchAttendees.Text = "🔍";
+            btnSearchAttendees.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBox1.Location = new Point(242, 10);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(183, 31);
+            textBox1.TabIndex = 0;
             // 
             // btnCreateEvent
             // 
@@ -610,7 +670,6 @@
             Controls.Add(lblUserName);
             Name = "EventForm";
             Text = "Event";
-            Load += EventForm_Load;
             panelLogin.ResumeLayout(false);
             panelLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -619,6 +678,9 @@
             panelEventDetail.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            panelAttendees.ResumeLayout(false);
+            panelAttendees.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -677,5 +739,10 @@
         private Label lblEventVenueDetail;
         private Label lblEventDateDetail;
         private Button btnPBack;
+        private Button btnAttendees;
+        private Panel panelAttendees;
+        private Button btnSearchAttendees;
+        private TextBox textBox1;
+        private DataGridView dataGridView1;
     }
 }

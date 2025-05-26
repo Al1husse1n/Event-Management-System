@@ -43,6 +43,7 @@
             btnCEvents.Text = "button1";
             btnCEvents.TextAlign = ContentAlignment.TopLeft;
             btnCEvents.UseVisualStyleBackColor = false;
+            btnCEvents.Click += btnCEvents_Click;
             // 
             // UserControl1
             // 
