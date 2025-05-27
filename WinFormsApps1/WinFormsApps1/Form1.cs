@@ -58,22 +58,24 @@ namespace WinFormsApps1
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
-                        SqlCommand cmd = new SqlCommand
+                        using(SqlCommand cmd = new SqlCommand
                         {
                             Connection = conn,
                             CommandText = "INSERT INTO Users(UserName, UserPassword, UserEmail, UserRole)" +
                             "              Values(@username, @userpassword, @useremail, @userrole)",
                             CommandType = CommandType.Text
-                        };
-                        cmd.Parameters.AddWithValue("@username", username);
-                        cmd.Parameters.AddWithValue("@userpassword", userpassword);
-                        cmd.Parameters.AddWithValue("@useremail", useremail);
-                        cmd.Parameters.AddWithValue("@userrole", userrole);
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        MessageBox.Show("You successfully registered!");
-                        Console.WriteLine(rowsAffected + " row(s) inserted into Users.");
-                        txtEmail.Text = ""; txtPassword.Text = ""; txtPassword2.Text = ""; txtUserName.Text = ""; radioProducer.Checked = false;
-                        lblFillError.Visible = false; lblInvalidEmail.Visible = false; lblInvalidUserName.Visible = false; lblInvalidConfirm.Visible = false;
+                        })
+                        {
+                            cmd.Parameters.AddWithValue("@username", username);
+                            cmd.Parameters.AddWithValue("@userpassword", userpassword);
+                            cmd.Parameters.AddWithValue("@useremail", useremail);
+                            cmd.Parameters.AddWithValue("@userrole", userrole);
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            MessageBox.Show("You successfully registered!");
+                            Console.WriteLine(rowsAffected + " row(s) inserted into Users.");
+                            txtEmail.Text = ""; txtPassword.Text = ""; txtPassword2.Text = ""; txtUserName.Text = ""; radioProducer.Checked = false;
+                            lblFillError.Visible = false; lblInvalidEmail.Visible = false; lblInvalidUserName.Visible = false; lblInvalidConfirm.Visible = false;
+                        }
                     }
                 }
             }
@@ -105,6 +107,7 @@ namespace WinFormsApps1
             {
                 MessageBox.Show(ex.Message);
             }
+            
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -126,72 +129,77 @@ namespace WinFormsApps1
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
-                        SqlCommand cmd = new SqlCommand
+                        using (SqlCommand cmd = new SqlCommand
                         {
                             Connection = conn,
-                            CommandText = "SELECT * From Users WHERE UserName=@username AND UserPassword=@userpassword",
+                            CommandText = "SELECT * From Users WHERE UserName COLLATE SQL_Latin1_General_CP1_CS_AS =@username AND UserPassword COLLATE SQL_Latin1_General_CP1_CS_AS =@userpassword",
                             CommandType = CommandType.Text
-                        };
-                        cmd.Parameters.AddWithValue("@username", username);
-                        cmd.Parameters.AddWithValue("@userpassword", userpassword);
-                        SqlDataReader reader = cmd.ExecuteReader();
-                        using (reader)
+                        })
                         {
+                            cmd.Parameters.AddWithValue("@username", username);
+                            cmd.Parameters.AddWithValue("@userpassword", userpassword);
+                            SqlDataReader reader = cmd.ExecuteReader();
 
-                            if (reader.Read())
+                            using (reader)
                             {
-                                txtLoginUN.Text = "User Name"; txtLoginPass.Text = "Password";
-                                string userrole = reader["UserRole"].ToString();
-                                string useremail = reader["UserEmail"].ToString();
-                                int userid = reader.GetInt32(reader.GetOrdinal("UserId"));
-                                string userName = reader["UserName"].ToString();
-                                if (userrole == "Producer")
+
+                                if (reader.Read())
                                 {
-                                    lblLoginError.Visible = false;
-                                    panelProducer.Visible = true;
-                                    lblPWelcome.Text = "Welcome " + username + ", Your User Id is: " + reader["UserId"].ToString();
-                                    using (SqlConnection conn1 = new SqlConnection(connectionString))
+                                    txtLoginUN.Text = "User Name"; txtLoginPass.Text = "Password";
+                                    string userrole = reader["UserRole"].ToString();
+                                    string useremail = reader["UserEmail"].ToString();
+                                    int userid = reader.GetInt32(reader.GetOrdinal("UserId"));
+                                    string userName = reader["UserName"].ToString();
+                                    if (userrole == "Producer")
                                     {
+                                        lblLoginError.Visible = false;
+                                        panelProducer.Visible = true;
+                                        lblPWelcome.Text = "Welcome " + username + ", Your User Id is: " + reader["UserId"].ToString();
+                                        using (SqlConnection conn1 = new SqlConnection(connectionString))
+                                        {
 
 
-                                        conn1.Open();
-                                        SqlCommand cmd1 = new SqlCommand
-                                        {
-                                            Connection = conn1,
-                                            CommandText = "SELECT EventName From Events WHERE ProducerId = @producerId",
-                                            CommandType = CommandType.Text
-                                        };
-                                        cmd1.Parameters.AddWithValue("@producerId", reader["UserId"]);
-                                        SqlDataReader reader1 = cmd1.ExecuteReader();
-                                        using (reader1)
-                                        {
-                                            if (reader1.HasRows)
+                                            conn1.Open();
+                                            SqlCommand cmd1 = new SqlCommand
                                             {
-                                                while (reader1.Read())
+                                                Connection = conn1,
+                                                CommandText = "SELECT EventName From Events WHERE ProducerId = @producerId",
+                                                CommandType = CommandType.Text
+                                            };
+                                            cmd1.Parameters.AddWithValue("@producerId", reader["UserId"]);
+                                            SqlDataReader reader1 = cmd1.ExecuteReader();
+                                            using (reader1)
+                                            {
+                                                if (reader1.HasRows)
                                                 {
-                                                    listBoxProducer.Items.Add(reader1["EventName"].ToString());
+                                                    while (reader1.Read())
+                                                    {
+                                                        listBoxProducer.Items.Add(reader1["EventName"].ToString());
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("Welcome " + username + ", You have not created any events yet. Please create an event.");
                                                 }
                                             }
-                                            else
-                                            {
-                                                MessageBox.Show("Welcome " + username + ", You have not created any events yet. Please create an event.");
-                                            }
                                         }
-                                    }
 
+                                    }
+                                    else
+                                    {
+                                        Hide();
+                                        CustomerForm cf = new CustomerForm(userid, userName, useremail);
+                                        cf.ShowDialog();
+                                        Show();
+                                        lblLoginError.Visible = false;
+
+                                    }
                                 }
                                 else
                                 {
-                                    this.Close();
-                                    Application.Run(new CustomerForm(userid, userName, useremail));
-                                    lblLoginError.Visible = false;
-
+                                    lblLoginError.Text = "Invalid username or password";
+                                    lblLoginError.Visible = true;
                                 }
-                            }
-                            else
-                            {
-                                lblLoginError.Text = "Invalid username or password";
-                                lblLoginError.Visible = true;
                             }
                         }
                     }
@@ -244,24 +252,26 @@ namespace WinFormsApps1
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
-                        SqlCommand cmd = new SqlCommand
+                        using (SqlCommand cmd = new SqlCommand
                         {
                             Connection = conn,
                             CommandText = "INSERT INTO Events(EventName, EventDateTime, EventVenue, ProducerId, EventDescription, TotalSeats, EventPrice)" +
                             "              Values(@eventname, @eventdate, @eventvenue, @producerId, @eventdescription, @eventseat, @eventprice)",
                             CommandType = CommandType.Text
-                        };
-                        cmd.Parameters.AddWithValue("@eventname", eventname);
-                        cmd.Parameters.AddWithValue("@eventdate", DateTime.Parse(eventdate));
-                        cmd.Parameters.AddWithValue("@eventvenue", eventvenue);
-                        cmd.Parameters.AddWithValue("@producerId", int.Parse(lblPWelcome.Text.Split(':')[1].Trim()));
-                        cmd.Parameters.AddWithValue("@eventdescription", eventdescription);
-                        cmd.Parameters.AddWithValue("@eventseat", eventseat);
-                        cmd.Parameters.AddWithValue("@eventprice", eventprice);
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        MessageBox.Show("You successfully created an event!");
-                        Console.WriteLine(rowsAffected + " row(s) inserted into Events.");
-                        txtCreateEventName.Text = ""; txtCreateEventDate.Text = ""; txtCreateEventVenue.Text = ""; txtCreateEventPrice.Text = ""; txtCreateEventSeat.Text = ""; txtCreateEventDescription.Text = "";
+                        })
+                        {
+                            cmd.Parameters.AddWithValue("@eventname", eventname);
+                            cmd.Parameters.AddWithValue("@eventdate", DateTime.Parse(eventdate));
+                            cmd.Parameters.AddWithValue("@eventvenue", eventvenue);
+                            cmd.Parameters.AddWithValue("@producerId", int.Parse(lblPWelcome.Text.Split(':')[1].Trim()));
+                            cmd.Parameters.AddWithValue("@eventdescription", eventdescription);
+                            cmd.Parameters.AddWithValue("@eventseat", eventseat);
+                            cmd.Parameters.AddWithValue("@eventprice", eventprice);
+                            int rowsAffected = cmd.ExecuteNonQuery();
+                            MessageBox.Show("You successfully created an event!");
+                            Console.WriteLine(rowsAffected + " row(s) inserted into Events.");
+                            txtCreateEventName.Text = ""; txtCreateEventDate.Text = ""; txtCreateEventVenue.Text = ""; txtCreateEventPrice.Text = ""; txtCreateEventSeat.Text = ""; txtCreateEventDescription.Text = "";
+                        }
                     }
                 }
             }
@@ -302,16 +312,18 @@ namespace WinFormsApps1
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {
                             conn.Open();
-                            SqlCommand cmd = new SqlCommand
+                            using (SqlCommand cmd = new SqlCommand
                             {
                                 Connection = conn,
                                 CommandText = "DeleteEvent",
                                 CommandType = CommandType.StoredProcedure
-                            };
-                            cmd.Parameters.AddWithValue("@eventid", deleteUserId);
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("You deleted an Event");
+                            })
+                            {
+                                cmd.Parameters.AddWithValue("@eventid", deleteUserId);
+                                cmd.ExecuteNonQuery();
+                                MessageBox.Show("You deleted an Event");
 
+                            }
                         }
                     }
                     else if (result == DialogResult.No)
@@ -342,23 +354,25 @@ namespace WinFormsApps1
                 using (SqlConnection conn1 = new SqlConnection(connectionString))
                 {
                     conn1.Open();
-                    SqlCommand cmd = new SqlCommand
+                    using (SqlCommand cmd = new SqlCommand
                     {
                         Connection = conn1,
                         CommandText = "Select EventId from Events Where EventName = @eventname",
                         CommandType = CommandType.Text
-                    };
-                    cmd.Parameters.AddWithValue("@eventname", listBoxProducer.SelectedItem.ToString());
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    })
                     {
-                        int eventid = Convert.ToInt32(reader["EventId"]);
-                        EventDetail(eventid);
-                        panelEventDetail.Visible = true;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Events detail not found");
+                        cmd.Parameters.AddWithValue("@eventname", listBoxProducer.SelectedItem.ToString());
+                        SqlDataReader reader = cmd.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            int eventid = Convert.ToInt32(reader["EventId"]);
+                            EventDetail(eventid);
+                            panelEventDetail.Visible = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Events detail not found");
+                        }
                     }
                 }
             }
@@ -379,24 +393,26 @@ namespace WinFormsApps1
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand
+                using (SqlCommand cmd = new SqlCommand
                 {
                     Connection = conn,
                     CommandText = "Select EventName, EventId, EventDateTime, EventVenue, TotalSeats, EventPrice from Events Where EventId = @eventid",
                     CommandType = CommandType.Text
-                };
-                cmd.Parameters.AddWithValue("@eventid", eventid);
-                SqlDataReader reader = cmd.ExecuteReader();
-                using (reader)
+                })
                 {
-                    if (reader.Read())
+                    cmd.Parameters.AddWithValue("@eventid", eventid);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    using (reader)
                     {
-                        lblEventNameDetail.Text = "Name: " + reader["EventName"].ToString();
-                        lblEventDateDetail.Text = "Date: " + reader["EventDateTime"].ToString();
-                        lblEventIdDetail.Text = "Event ID: " + reader["EventId"].ToString();
-                        lblEventPriceDetail.Text = "Price: " + reader["EventPrice"].ToString();
-                        lblEventSeatsDetail.Text = "Total Seats: " + reader["TotalSeats"].ToString();
-                        lblEventVenueDetail.Text = "Venue: " + reader["EventVenue"].ToString();
+                        if (reader.Read())
+                        {
+                            lblEventNameDetail.Text = "Name: " + reader["EventName"].ToString();
+                            lblEventDateDetail.Text = "Date: " + reader["EventDateTime"].ToString();
+                            lblEventIdDetail.Text = "Event ID: " + reader["EventId"].ToString();
+                            lblEventPriceDetail.Text = "Price: " + reader["EventPrice"].ToString();
+                            lblEventSeatsDetail.Text = "Total Seats: " + reader["TotalSeats"].ToString();
+                            lblEventVenueDetail.Text = "Venue: " + reader["EventVenue"].ToString();
+                        }
                     }
                 }
             }
@@ -430,17 +446,19 @@ namespace WinFormsApps1
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    SqlCommand cmd = new SqlCommand
+                    using (SqlCommand cmd = new SqlCommand
                     {
                         Connection = conn,
                         CommandText = "Attendee",
                         CommandType = CommandType.StoredProcedure
-                    };
-                    cmd.Parameters.AddWithValue("@eventid", int.Parse(lblEventIdDetail.Text.Split(':')[1].Trim()));
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    DataTable table = new DataTable();
-                    adapter.Fill(table);
-                    dataGridView1.DataSource = table;
+                    })
+                    {
+                        cmd.Parameters.AddWithValue("@eventid", int.Parse(lblEventIdDetail.Text.Split(':')[1].Trim()));
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable table = new DataTable();
+                        adapter.Fill(table);
+                        dataGridView1.DataSource = table;
+                    }
                 }
             }
             catch (Exception ex)

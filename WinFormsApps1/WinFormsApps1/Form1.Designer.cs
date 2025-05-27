@@ -309,6 +309,7 @@
             txtLoginPass.Size = new Size(279, 31);
             txtLoginPass.TabIndex = 1;
             txtLoginPass.Text = "Password";
+            txtLoginPass.UseSystemPasswordChar = true;
             // 
             // txtLoginUN
             // 

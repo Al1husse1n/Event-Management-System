@@ -39,33 +39,35 @@ namespace WinFormsApps1
             {
                 conn.Open();
 
-                SqlCommand cmd = new SqlCommand
+                using (SqlCommand cmd = new SqlCommand
                 {
                     Connection = conn,
                     CommandText = "SELECT * FROM Events WHERE EventName = @EventName",
                     CommandType = CommandType.Text
-                };
-                cmd.Parameters.AddWithValue("@EventName", btnCEvents.Text);
-                SqlDataReader reader = cmd.ExecuteReader();
-                using (reader)
+                })
                 {
-                    if (reader.HasRows)
+                    cmd.Parameters.AddWithValue("@EventName", btnCEvents.Text);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    using (reader)
                     {
-                        while (reader.Read())
+                        if (reader.HasRows)
                         {
-                            cf.txtCEventDescription.Text = reader["EventDescription"].ToString();
-                            cf.lblCEventDate.Text = "Date: "+ reader["EventDateTime"].ToString();
-                            cf.lblCEventVenue.Text = "Venue: "+ reader["EventVenue"].ToString();
-                            cf.lblCEventPrice.Text = "Price: " + reader["EventPrice"].ToString();
-                            cf.lblCEventName.Text = btnCEvents.Text;
-                            cf.lblCEventSeats.Text = "Remaining Seats: " + (reader.GetInt32(reader.GetOrdinal("TotalSeats")) - reader.GetInt32(reader.GetOrdinal("occupiedSeats"))).ToString();
+                            while (reader.Read())
+                            {
+                                cf.txtCEventDescription.Text = reader["EventDescription"].ToString();
+                                cf.lblCEventDate.Text = "Date: " + reader["EventDateTime"].ToString();
+                                cf.lblCEventVenue.Text = "Venue: " + reader["EventVenue"].ToString();
+                                cf.lblCEventPrice.Text = "Price: " + reader["EventPrice"].ToString();
+                                cf.lblCEventName.Text = btnCEvents.Text;
+                                cf.lblCEventSeats.Text = "Remaining Seats: " + (reader.GetInt32(reader.GetOrdinal("TotalSeats")) - reader.GetInt32(reader.GetOrdinal("occupiedSeats"))).ToString();
+
+                            }
 
                         }
-                        
-                    }
-                    else
-                    {
-                        MessageBox.Show("No details found for this event.");
+                        else
+                        {
+                            MessageBox.Show("No details found for this event.");
+                        }
                     }
                 }
             }

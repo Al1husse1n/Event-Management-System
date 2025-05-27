@@ -30,7 +30,6 @@
         {
             groupBox1 = new GroupBox();
             llProfile = new LinkLabel();
-            llHome = new LinkLabel();
             llCLogout = new LinkLabel();
             panelWelcomeCustomer = new Panel();
             lblUpcoming = new Label();
@@ -54,7 +53,6 @@
             // 
             groupBox1.BackColor = SystemColors.AppWorkspace;
             groupBox1.Controls.Add(llProfile);
-            groupBox1.Controls.Add(llHome);
             groupBox1.Controls.Add(llCLogout);
             groupBox1.Dock = DockStyle.Left;
             groupBox1.Font = new Font("Segoe UI", 14F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
@@ -68,34 +66,25 @@
             // 
             llProfile.AutoSize = true;
             llProfile.LinkColor = Color.Black;
-            llProfile.Location = new Point(6, 124);
+            llProfile.Location = new Point(6, 74);
             llProfile.Name = "llProfile";
             llProfile.Size = new Size(106, 38);
             llProfile.TabIndex = 3;
             llProfile.TabStop = true;
             llProfile.Text = "Profile";
-            // 
-            // llHome
-            // 
-            llHome.AutoSize = true;
-            llHome.LinkColor = Color.Black;
-            llHome.Location = new Point(6, 41);
-            llHome.Name = "llHome";
-            llHome.Size = new Size(95, 38);
-            llHome.TabIndex = 2;
-            llHome.TabStop = true;
-            llHome.Text = "Home";
+            llProfile.LinkClicked += llProfile_LinkClicked;
             // 
             // llCLogout
             // 
             llCLogout.AutoSize = true;
             llCLogout.LinkColor = Color.Black;
-            llCLogout.Location = new Point(4, 205);
+            llCLogout.Location = new Point(6, 185);
             llCLogout.Name = "llCLogout";
             llCLogout.Size = new Size(108, 38);
             llCLogout.TabIndex = 1;
             llCLogout.TabStop = true;
             llCLogout.Text = "Logout";
+            llCLogout.LinkClicked += llCLogout_LinkClicked;
             // 
             // panelWelcomeCustomer
             // 
@@ -275,7 +264,6 @@
 
         private GroupBox groupBox1;
         private LinkLabel llCLogout;
-        private LinkLabel llHome;
         private Panel panelWelcomeCustomer;
         private LinkLabel llProfile;
         private Label lblCWelcome;
