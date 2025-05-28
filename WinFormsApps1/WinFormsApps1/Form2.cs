@@ -14,6 +14,7 @@ namespace WinFormsApps1
 {
     public partial class CustomerForm : Form
     {
+        private string connectionString;
         int UserId;
         string UserName;
         string Email;
@@ -24,6 +25,7 @@ namespace WinFormsApps1
             this.UserId = UserId;
             this.UserName = UserName;
             this.Email = Email;
+            connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
 
         }
 
@@ -32,7 +34,7 @@ namespace WinFormsApps1
             try
             {
                 lblCWelcome.Text = "Welcome, " + UserName;
-                string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+                
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
@@ -83,7 +85,7 @@ namespace WinFormsApps1
                 }
                 else
                 {
-                    string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+                   
                     string searchEvent = txtCSearchEvent.Text;
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
@@ -145,7 +147,7 @@ namespace WinFormsApps1
 
             try
             {
-                string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+                
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
 
@@ -238,7 +240,7 @@ namespace WinFormsApps1
 
         private Boolean PayedBefore(int userId, int EventId)
         {
-            string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+            
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();

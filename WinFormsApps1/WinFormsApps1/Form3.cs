@@ -16,13 +16,14 @@ namespace WinFormsApps1
     {
         int userid;
         string username, useremail;
+        private string connectionString;
         public ProfileForm(int userid, string username, string useremail)
         {
             InitializeComponent();
             this.userid = userid;
             this.username = username;
             this.useremail = useremail;
-
+            connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
             txtUpdateUsername.Text = username;
             txtUpdateEmail.Text = useremail;
         }
@@ -41,7 +42,7 @@ namespace WinFormsApps1
                 }
                 else
                 {
-                    string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+                    
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();

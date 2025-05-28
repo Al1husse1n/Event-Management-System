@@ -15,11 +15,13 @@ namespace WinFormsApps1
     public partial class UserControl1 : UserControl
     {
         private CustomerForm cf;
+        private string connectionString;
         public UserControl1(CustomerForm cf, string EventName)
         {
             InitializeComponent();
             btnCEvents.Text = EventName;
             this.cf = cf;
+            connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
@@ -30,7 +32,7 @@ namespace WinFormsApps1
         private void btnCEvents_Click(object sender, EventArgs e)
         {
             
-            string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+            
             cf.flowLayoutPanel1.Visible = false;
             cf.txtCEventDescription.Visible = true;
             cf.btnPay.Visible = true;

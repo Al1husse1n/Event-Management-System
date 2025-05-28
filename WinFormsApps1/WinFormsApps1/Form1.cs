@@ -6,9 +6,11 @@ namespace WinFormsApps1
 {
     public partial class EventForm : Form
     {
+        private string connectionString;
         public EventForm()
         {
             InitializeComponent();
+            connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
         }
 
 
@@ -31,7 +33,7 @@ namespace WinFormsApps1
 
             try
             {
-                string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+                
                 string username, userpassword, useremail, userrole;
                 if (txtUserName.Text == "" || txtEmail.Text == "" || txtPassword.Text == "" || txtPassword2.Text == "")
                 {
@@ -114,7 +116,7 @@ namespace WinFormsApps1
         {
             try
             {
-                string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+                
                 if (txtLoginUN.Text == "" || txtLoginPass.Text == "")
                 {
                     throw new EmptyFieldException("Empty FIeld");
@@ -233,7 +235,7 @@ namespace WinFormsApps1
         {
             try
             {
-                string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+                
                 if (txtCreateEventName.Text == "Event name" || txtCreateEventDate.Text == "Date, eg: 00:00:00" || txtCreateEventVenue.Text == "Venue" || txtCreateEventPrice.Text == "Price per seat" || txtCreateEventSeat.Text == "Total Seats" || txtCreateEventDescription.Text == "Description..." || txtCreateEventName.Text == "" || txtCreateEventDate.Text == "" || txtCreateEventVenue.Text == "" || txtCreateEventPrice.Text == "" || txtCreateEventSeat.Text == "" || txtCreateEventDescription.Text == "")
                 {
                     throw new EmptyFieldException("Empty FIeld");
@@ -308,7 +310,7 @@ namespace WinFormsApps1
                     {
 
                         int deleteUserId = int.Parse(txtDeleteEvent.Text);
-                        string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+                        
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {
                             conn.Open();
@@ -348,7 +350,7 @@ namespace WinFormsApps1
 
         private void listBoxProducer_DoubleClick(object sender, EventArgs e)
         {
-            string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+            
             try
             {
                 using (SqlConnection conn1 = new SqlConnection(connectionString))
@@ -388,7 +390,7 @@ namespace WinFormsApps1
 
         private void EventDetail(int eventid)
         {
-            string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+           
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -442,7 +444,7 @@ namespace WinFormsApps1
             try
             {
                 panelAttendees.Visible = true;
-                string connectionString = "Server=DESKTOP-CPMLUNC\\SQLEXPRESS;Database=event;Integrated Security = True; TrustServerCertificate = True";
+                
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
