@@ -33,7 +33,7 @@ namespace WinFormsApps1
 
             try
             {
-                
+
                 string username, userpassword, useremail, userrole;
                 if (txtUserName.Text == "" || txtEmail.Text == "" || txtPassword.Text == "" || txtPassword2.Text == "")
                 {
@@ -60,7 +60,7 @@ namespace WinFormsApps1
                     using (SqlConnection conn = new SqlConnection(connectionString))
                     {
                         conn.Open();
-                        using(SqlCommand cmd = new SqlCommand
+                        using (SqlCommand cmd = new SqlCommand
                         {
                             Connection = conn,
                             CommandText = "INSERT INTO Users(UserName, UserPassword, UserEmail, UserRole)" +
@@ -109,14 +109,14 @@ namespace WinFormsApps1
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
             try
             {
-                
+
                 if (txtLoginUN.Text == "" || txtLoginPass.Text == "")
                 {
                     throw new EmptyFieldException("Empty FIeld");
@@ -235,7 +235,7 @@ namespace WinFormsApps1
         {
             try
             {
-                
+
                 if (txtCreateEventName.Text == "Event name" || txtCreateEventDate.Text == "Date, eg: 00:00:00" || txtCreateEventVenue.Text == "Venue" || txtCreateEventPrice.Text == "Price per seat" || txtCreateEventSeat.Text == "Total Seats" || txtCreateEventDescription.Text == "Description..." || txtCreateEventName.Text == "" || txtCreateEventDate.Text == "" || txtCreateEventVenue.Text == "" || txtCreateEventPrice.Text == "" || txtCreateEventSeat.Text == "" || txtCreateEventDescription.Text == "")
                 {
                     throw new EmptyFieldException("Empty FIeld");
@@ -272,7 +272,7 @@ namespace WinFormsApps1
                             int rowsAffected = cmd.ExecuteNonQuery();
                             MessageBox.Show("You successfully created an event!");
                             Console.WriteLine(rowsAffected + " row(s) inserted into Events.");
-                            txtCreateEventName.Text = ""; txtCreateEventDate.Text = ""; txtCreateEventVenue.Text = ""; txtCreateEventPrice.Text = ""; txtCreateEventSeat.Text = ""; txtCreateEventDescription.Text = "";
+                            txtCreateEventName.Text = "Event name"; txtCreateEventDate.Text = "Date, eg: 00:00:00"; txtCreateEventVenue.Text = "Venue"; txtCreateEventPrice.Text = "Price per seat"; txtCreateEventSeat.Text = "Total Seats"; txtCreateEventDescription.Text = "Description...";
                         }
                     }
                 }
@@ -310,7 +310,7 @@ namespace WinFormsApps1
                     {
 
                         int deleteUserId = int.Parse(txtDeleteEvent.Text);
-                        
+
                         using (SqlConnection conn = new SqlConnection(connectionString))
                         {
                             conn.Open();
@@ -350,7 +350,7 @@ namespace WinFormsApps1
 
         private void listBoxProducer_DoubleClick(object sender, EventArgs e)
         {
-            
+
             try
             {
                 using (SqlConnection conn1 = new SqlConnection(connectionString))
@@ -390,7 +390,7 @@ namespace WinFormsApps1
 
         private void EventDetail(int eventid)
         {
-           
+
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -444,7 +444,7 @@ namespace WinFormsApps1
             try
             {
                 panelAttendees.Visible = true;
-                
+
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
